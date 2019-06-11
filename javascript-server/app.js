@@ -1,22 +1,23 @@
 //------Imports------
 "use strict";
 const app = require('express')();
-const server = require('http').Server(app);
+const http = require('http');
+const server = http.Server(app);
 const io = require('socket.io')(server);
 const mongoose = require('mongoose');
 const User = require('./user-schema');
 
 //-----Global Variables------
-const hostname = '127.0.0.1';
+const hostname = '35.237.137.132'; // Change if change servers
 const port = 3000;
-const mongoDB = 'mongodb://' + hostname +'/my_database';
+const mongoDB = 'mongodb://' + hostname + '/my_database';
 let clients = {};
 let learnerDict = {};
 let teacherDict = {};
 const connectedPeers = new Set();
 
 // Start Listening
-server.listen(port, hostname, () => {
+server.listen(port, '127.0.0.1', () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 // Connect to mongoDB

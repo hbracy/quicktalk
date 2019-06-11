@@ -1,0 +1,46 @@
+2019-06-11T02:48:37.844+0000 I CONTROL  [main] Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten] MongoDB starting : pid=2192 port=27017 dbpath=/data/db 64-bit host=instance-1
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten] db version v4.0.6
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten] git version: caa42a1f75a56c7643d0b68d3880444375ec42e3
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.0j  20 Nov 2018
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten] modules: none
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten] build environment:
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten]     distmod: debian92
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2019-06-11T02:48:37.899+0000 I CONTROL  [initandlisten] options: {}
+2019-06-11T02:48:37.973+0000 I STORAGE  [initandlisten] Detected data files in /data/db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2019-06-11T02:48:37.973+0000 I STORAGE  [initandlisten] 
+2019-06-11T02:48:37.973+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2019-06-11T02:48:37.973+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2019-06-11T02:48:37.973+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=256M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2019-06-11T02:48:38.994+0000 I STORAGE  [initandlisten] WiredTiger message [1560221318:994138][2192:0x7f5bb9303080], txn-recover: Main recovery loop: starting at 9/4992 to 10/256
+2019-06-11T02:48:39.477+0000 I STORAGE  [initandlisten] WiredTiger message [1560221319:474191][2192:0x7f5bb9303080], txn-recover: Recovering log 9 through 10
+2019-06-11T02:48:39.712+0000 I STORAGE  [initandlisten] WiredTiger message [1560221319:712462][2192:0x7f5bb9303080], txn-recover: Recovering log 10 through 10
+2019-06-11T02:48:39.805+0000 I STORAGE  [initandlisten] WiredTiger message [1560221319:803698][2192:0x7f5bb9303080], txn-recover: Set global recovery timestamp: 0
+2019-06-11T02:48:40.080+0000 I RECOVERY [initandlisten] WiredTiger recoveryTimestamp. Ts: Timestamp(0, 0)
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] 
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] 
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server. 
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] **          Start the server with --bind_ip <address> to specify which IP 
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
+2019-06-11T02:48:40.355+0000 I CONTROL  [initandlisten] 
+2019-06-11T02:48:40.638+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+2019-06-11T02:48:41.029+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+2019-06-11T02:48:41.526+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:50198 #1 (1 connection now open)
+2019-06-11T02:48:41.681+0000 I NETWORK  [conn1] received client metadata from 127.0.0.1:50198 conn1: { driver: { name: "mongo-java-driver", version: "3.9.1" }, os: { type: "Linux", name: "Linux", architecture: "amd64", version: "4.9.0-8-amd64" }, platform: "Java/Oracle Corporation/1.8.0_212-8u212-b03-2~deb9u1-b03" }
+2019-06-11T02:48:53.025+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:50202 #2 (2 connections now open)
+2019-06-11T02:48:53.032+0000 I NETWORK  [conn2] received client metadata from 127.0.0.1:50202 conn2: { driver: { name: "nodejs", version: "3.2.6" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.9.0-8-amd64" }, platform: "Node.js v8.16.0, LE, mongodb-core: 3.2.6" }
+2019-06-11T02:49:00.331+0000 I NETWORK  [conn2] end connection 127.0.0.1:50202 (1 connection now open)
+2019-06-11T02:53:41.370+0000 I COMMAND  [LogicalSessionCacheRefresh] command config.system.sessions command: listIndexes { listIndexes: "system.sessions", cursor: {}, $db: "config" } numYields:0 reslen:324 locks:{ Global: { acquireCount: { r: 1 } }, Database: { acquireCount: { r: 1 } }, Collection: { acquireCount: { r: 1 } } } protocol:op_msg 105ms
+2019-06-11T02:53:41.825+0000 I WRITE    [LogicalSessionCacheRefresh] update config.system.sessions command: { q: { _id: { id: UUID("809c457d-d7cf-4bf1-bcc8-76b343e89ece"), uid: BinData(0, E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855) } }, u: { $currentDate: { lastUse: true } }, multi: false, upsert: true } planSummary: IDHACK keysExamined:0 docsExamined:0 nMatched:0 nModified:0 upsert:1 keysInserted:2 numYields:2 locks:{ Global: { acquireCount: { r: 3, w: 3 } }, Database: { acquireCount: { w: 3 } }, Collection: { acquireCount: { w: 3 } } } 293ms
+2019-06-11T02:53:41.878+0000 I COMMAND  [LogicalSessionCacheRefresh] command config.$cmd command: update { update: "system.sessions", ordered: false, allowImplicitCollectionCreation: false, writeConcern: { w: "majority", wtimeout: 15000 }, $db: "config" } numYields:0 reslen:171 locks:{ Global: { acquireCount: { r: 3, w: 3 } }, Database: { acquireCount: { w: 3 } }, Collection: { acquireCount: { w: 3 } } } protocol:op_msg 435ms
+2019-06-11T03:14:44.925+0000 I NETWORK  [listener] connection accepted from 127.0.0.1:50476 #3 (2 connections now open)
+2019-06-11T03:14:44.948+0000 I NETWORK  [conn3] received client metadata from 127.0.0.1:50476 conn3: { driver: { name: "nodejs", version: "3.2.6" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.9.0-8-amd64" }, platform: "Node.js v8.16.0, LE, mongodb-core: 3.2.6" }
+2019-06-11T03:22:53.363+0000 I NETWORK  [conn3] end connection 127.0.0.1:50476 (1 connection now open)
