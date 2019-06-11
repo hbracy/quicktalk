@@ -1,0 +1,14 @@
+{
+  "name": "quick-talk-server",
+  "version": "0.0.1",
+  "description": "my first socket.io app",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "express": "^4.15.2",
+    "mongoose": "^5.5.13",
+    "mongoose-unique-validator": "^2.0.3",
+    "simple-peer": "^9.3.0",
+    "simple-signal-server": "^2.1.0",
+    "socket.io": "^2.2.0"
+  }
+}

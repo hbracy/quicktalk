@@ -1,0 +1,182 @@
+html, body {
+	height: 100%;
+	font-family: arial;
+	color: white;
+ font-size:4vw;
+
+}
+
+html {
+		display: table;
+		margin: auto;
+}
+
+body {
+		display: table-cell;
+		vertical-align: center;
+	  height: 100%;
+}
+
+
+p {
+		text-align: center;
+	}
+
+form {
+		text-align: center;
+
+	}
+
+h2 {
+	text-align: center;
+	color: white;
+}
+
+banner {
+	text-align: center;
+	color: white;
+	font-size: 5vw;
+	background-color: #ffc002;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+} 
+
+#learnButton {
+	background-color: #9602ff;
+
+}
+
+#landing {
+/*	display: table;*/
+}
+
+#left {
+	left: 0;
+	background-color: #1D7A79;
+}
+
+#right {
+	right: 0;
+}
+
+#teachButton {
+	top: 0;
+	background-color: #C30713;
+
+}
+#learnButton {
+	bottom: 0;
+	background-color: #042A81;
+}
+
+/* Split the screen in half */
+.split-vertical {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+/*  padding-top: 20px;*/
+}
+
+.split-horizontal {
+	  height: 50%;
+		width: 100%;
+/*		position: fixed;*/
+/*		z-index: 1;*/
+/*		top: 0;*/
+/*		overflow-x: hidden;*/
+}
+
+
+.slide-in {
+	display: none;
+}
+
+.gotobtn {
+	height: 50%;
+	width: 100%;
+	position: absolute;
+	cursor: pointer;
+	color: white;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.dropbtn {
+	background-color: #9602ff;
+	color: white;
+	padding: 2%;
+	font-size: 5vw;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+
+}
+.subbtn {
+	background-color: #3498DB;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+	display: block;
+
+}
+
+	.submit {
+			text-align: center;
+
+	}
+
+.dropbtn:hover, .dropbtn:focus {
+	background-color: #2980B9;
+}
+
+.dropdown {
+	text-align: center;
+	padding-top: 10px;
+	position: relative;
+	display: block;
+
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+.show {display: block;}

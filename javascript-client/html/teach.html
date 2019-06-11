@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../css/style.css" type="text/css">
+	</head>
+	<body>
+		<h2>QUICK TALK</h2>
+		<div class="dropdown">
+			<button onclick="wantToTeach()" class="dropbtn">What can you teach?</button>
+			<div id="teachDropdown" class="dropdown-content">
+				<a onclick="addTeach(this.id)" id=english>English</a>
+				<a onclick="addTeach(this.id)" id=chinese>Chinese</a>
+				<a onclick="addTeach(this.id)" id=spanish>Spanish</a>
+				<a onclick="addTeach(this.id)" id=portuguese>Portuguese</a>
+				<a onclick="addTeach(this.id)" id=russian>Russian</a>
+				<a onclick="addTeach(this.id)" id=arabic>Arabic</a>
+			</div>
+		</div>
+		<div>
+			<form>
+				Email: <input type="email" id="email_input">
+			</form>
+		</div>
+		<div class="submit">
+			<button onclick="teachCall()" class="subbtn">CALL</button>
+		</div >
+		<video width="320" height="240" id="incomingVideo"></video>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.3.0/simplepeer.min.js"></script>
+		<script src="https://github.com/t-mullen/simple-signal/releases/download/2.1.0/simple-signal-client.min.js"></script>
+		<script type="text/javascript" src="../js/function.js"></script>
+	</body>
+</html>

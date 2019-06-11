@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/styles.css" type="text/css">
+	</head>
+	<body>
+		
+		<div id="right" class="split-vertical">
+			<div id="teach" class="slide-in">
+				<div class="dropdown">
+				<button onclick="wantToTeach()" class="dropbtn">What can you teach?</button>
+				<div id="teachDropdown" class="dropdown-content">
+					<a onclick="addTeach(this.id)" id=english>English</a>
+					<a onclick="addTeach(this.id)" id=chinese>Chinese</a>
+					<a onclick="addTeach(this.id)" id=spanish>Spanish</a>
+					<a onclick="addTeach(this.id)" id=portuguese>Portuguese</a>
+					<a onclick="addTeach(this.id)" id=russian>Russian</a>
+					<a onclick="addTeach(this.id)" id=arabic>Arabic</a>
+				</div>
+				</div>
+				<div class="submit">
+					<button onclick="teachCall()" class="subbtn">CALL</button>
+				</div >
+				<video width="320" height="240" id="incomingVideo"></video>
+			</div>
+			<div id="learn" class="slide-in split-horizontal">
+				<div class="dropdown">
+					<button onclick="wantToLearn()" class="dropbtn">What do you want to learn?</button>
+					<div id="learnDropdown" class="dropdown-content">
+						<a onclick="addLearn(this.id)" id=english>English</a>
+						<a onclick="addLearn(this.id)" id=chinese>Chinese</a>
+						<a onclick="addLearn(this.id)" id=spanish>Spanish</a>
+						<a onclick="addLearn(this.id)" id=portuguese>Portuguese</a>
+						<a onclick="addLearn(this.id)" id=russian>Russian</a>
+						<a onclick="addLearn(this.id)" id=arabic>Arabic</a>
+					</div>
+				</div>
+				<div class="submit">
+					<button onclick="learnCall()" class="subbtn">CALL</button>
+				</div >
+				<video width="320" height="240" id="incomingVideo"></video>
+			</div>
+			<div id="landing">
+					<div>
+						<div onclick="goToLearn()" class="gotobtn" id="learnButton">START LEARNING</div>
+						<div class="arrow right"></div>
+					</div>
+					<div onclick="goToTeach()" class="gotobtn" id="teachButton">START TEACHING</div>
+			</div>
+		</div>
+			
+		<div id="left" class="split-vertical">
+			<banner>
+				<h2>QUICK TALK</h2>
+			</banner>
+
+			<div>
+				<form>
+					Username: <input name="username" type="text" id="username-input">
+				</form>
+				<form>
+					Email: <input type="email" id="email-input">
+				</form>
+				<form>
+					Password: <input type="password" id="password-input" autocomplete="">
+				</form>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.3.0/simplepeer.min.js"></script>
+		<script src="https://github.com/t-mullen/simple-signal/releases/download/2.1.0/simple-signal-client.min.js"></script>
+		<script type="text/javascript" src="/function.js"></script>
+	</body>
+</html>
