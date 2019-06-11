@@ -19,6 +19,7 @@ let learnerDict = {};
 let teacherDict = {};
 const connectedPeers = new Set();
 
+io.origins('*:*')
 // Start Listening
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
