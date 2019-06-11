@@ -8,6 +8,11 @@ const websiteName = 'thequicktalk.com';
 const serverPort = 3000;
 const socket = io("http://" + websiteName + ":" + serverPort);
 
+const xhttp = new XMLHttpRequest();
+
+
+
+
 socket.on('serverConnection', function(msg) {
 	console.log(msg);
 });

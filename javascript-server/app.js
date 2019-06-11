@@ -20,7 +20,7 @@ let teacherDict = {};
 const connectedPeers = new Set();
 
 // Start Listening
-server.listen(port, localhost, () => {
+server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 // Connect to mongoDB
