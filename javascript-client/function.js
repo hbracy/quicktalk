@@ -2,9 +2,10 @@
 //------Global variables-----
 var clientUsername = "";
 var connection = null;
+//const serverHostname = '192.168.1.3';
 const serverHostname = '35.237.137.132';
 const serverPort = 3000;
-const socket = io.connect("http://" + serverHostname + ":" + serverPort);
+const socket = io("http://" + serverHostname + ":" + serverPort);
 
 socket.on('serverConnection', function(msg) {
 	console.log(msg);
