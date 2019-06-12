@@ -10,8 +10,6 @@ const User = require('./user-schema');
 //-----Global Variables------
 //const hostname = '216.227.1.113'; // Change if change servers
 const hostname = '35.237.137.132';
-//const hostname = 'thequicktalk.com';
-//const localhost = '127.0.0.1';
 const localhost = '0.0.0.0'
 const port = 3000;
 const mongoDB = 'mongodb://' + localhost + '/my_database';

@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		
-		<div id="right" class="split-vertical">
+		<div class="right split-vertical">
 			<div id="teach" class="slide-in">
 				<div class="dropdown">
 				<button onclick="wantToTeach()" class="dropbtn">What can you teach?</button>
@@ -41,34 +41,67 @@
 				</div >
 				<video width="320" height="240" id="incomingVideo"></video>
 			</div>
-			<div id="landing">
-					<div>
-						<div onclick="goToLearn()" class="gotobtn" id="learnButton">START LEARNING</div>
-						<div class="arrow right"></div>
-					</div>
-					<div onclick="goToTeach()" class="gotobtn" id="teachButton">START TEACHING</div>
+			
+			<div id="choice">
+					<myButton class= "top gotobtn"  onclick="goToTeach()">
+						<div class="centered">
+							<div  id="teachButton" class="btn">START TEACHING</div>
+							<i class="arrow point-right"></i>
+						</div>
+					</myButton>
+					<myButton class="bottom gotobtn" onclick="goToLearn()">
+						<div class="centered">
+							<div id="learnButton" class="btn">START LEARNING</div>
+							<i class="arrow point-right"></i>
+						</div>
+					</myButton>
 			</div>
 		</div>
 			
-		<div id="left" class="split-vertical">
+		<div class="left split-vertical centered">
 			<banner>
 				<h2>QUICK TALK</h2>
 			</banner>
-
+			
 			<div>
-				<form>
-					Username: <input name="username" type="text" id="username-input">
-				</form>
-				<form>
-					Email: <input type="email" id="email-input">
-				</form>
-				<form>
-					Password: <input type="password" id="password-input" autocomplete="">
-				</form>
+				<myButton class="login userBtn" onclick="activateLoginForm()">LOGIN</myButton>
 			</div>
+			
+			<div>
+				<myButton id="signup-button" class="signup userBtn" onclick="activateSignupForm()">SIGNUP</myButton>
+			</div>
+			
+			<div class="user-form" id="login-form">
+				<form>
+					<input type="email" class="email-input" placeholder="Email">
+				</form>
+				<form>
+					<input type="password" class="password-input" autocomplete="" placeholder="Password">
+				</form>
+				<myButton onclick="login()">Login</myButton>
+			</div>
+			
+			<div class="user-form" id="signup-form">
+				<form>
+					<input name="username" type="text" id="username-input" placeholder="Username">
+				</form>
+				<form>
+					<input type="email" class="email-input" placeholder="Email">
+				</form>
+				<form>
+					<input type="password" class="password-input" autocomplete="" placeholder="Password">
+				</form>
+				<form>
+					<input type="password" class="password-input" autocomplete="" placeholder="Confirm Password">
+				</form>
+				<myButton onclick="signUp()">Sign Up</myButton>
+
+			</div>
+			
 		</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.3.0/simplepeer.min.js"></script>
+		<script type="text/javascript" src='http://35.237.137.132:3000/socket.io/socket.io.js'>
+		</script>
 		<script src="https://github.com/t-mullen/simple-signal/releases/download/2.1.0/simple-signal-client.min.js"></script>
 		<script type="text/javascript" src="function.js"></script>
 	</body>

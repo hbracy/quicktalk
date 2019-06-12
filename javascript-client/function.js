@@ -4,14 +4,8 @@ var clientUsername = "";
 var connection = null;
 //const serverHostname = '192.168.1.3';
 const serverHostname = '35.237.137.132';
-const websiteName = 'thequicktalk.com';
 const serverPort = 3000;
-const socket = io("http://" + websiteName + ":" + serverPort);
-
-const xhttp = new XMLHttpRequest();
-
-
-
+const socket = io("http://" + serverHostname + ":" + serverPort);
 
 socket.on('serverConnection', function(msg) {
 	console.log(msg);
@@ -88,7 +82,7 @@ socket.on('matched', function(msg) {
 
 function teachCall() {
 		// connection is opened and ready to use
-		clientUsername = document.getElementById("email_input").value
+		clientUsername = document.getElementById("email-input").value
 		const teachMessage = {
 			username: clientUsername,
 			kind: 'teach',
@@ -110,33 +104,103 @@ function learnCall() {
 		socket.emit('matchRequest', learnMessage);
 }
 
+
+
+function login() {
+	const form = document.getElementById("login-form");
+	const inputEmail = form.getElementsByClassName("email-input")[0].value;
+	const inputPasswords = form.getElementsByClassName("password-input");
+	
+	if (userFormIsNotValid("username", inputEmail, inputPasswords)) {
+		return;
+	}
+
+	const loginMessage = {
+		email: inputEmail, 
+		password: inputPasswords[0].value
+	};
+
+	socket.emit('login', loginMessage);
+
+}
+
 function signUp() {
+	const form = document.getElementById("signup-form");
 	const inputUsername = document.getElementById("username-input").value;
-	const inputEmail = document.getElementById("email-input").value;
-	const inputPassword = document.getElementById("password-input").value;
+	const inputEmail = form.getElementsByClassName("email-input")[0].value;
+	const inputPasswords = form.getElementsByClassName("password-input");
+	
+	if (userFormIsNotValid(inputUsername, inputEmail, inputPasswords)) {
+		return;
+	}
 
 	const signUpMessage = {
 		username: inputUsername, 
 		email: inputEmail, 
-		password: inputPassword
+		password: inputPasswords[0].value
 	};
 
 	socket.emit('signup', signUpMessage);
 
 }
 
+
+function userFormIsNotValid(inputUsername, inputEmail, inputPasswords) {
+		console.log(inputPasswords.length);
+
+	if (!inputUsername || !inputEmail || !inputPasswords) {
+	alert("You left a field blank");
+	return true;
+	}
+	
+	let i;
+	let first = inputPasswords[0].value;
+	for (i = 0; i < inputPasswords.length; i++) {
+		console.log(first, inputPasswords[i].value)
+		if (first != inputPasswords[i].value) {
+			alert("Passwords must be the same.");
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
 function goToLearn() {
-	signUp();
+	// Check if signed in
 	window.location = "#learn";
 	document.getElementById("learn").style.display = "inline-block";
-	document.getElementById("landing").style.display = "none";
+	document.getElementById("choice").style.display = "none";
 }
 
 function goToTeach() {
-	signUp();
+	// Check if signed in
 	window.location = "#teach";
 	document.getElementById("teach").style.display = "inline-block";
-	document.getElementById("landing").style.display = "none";
+	document.getElementById("choice").style.display = "none";
+
+}
+
+function activateLoginForm() {
+	document.getElementById("login-form").style.display = "inline-block";
+	let btns = document.getElementsByClassName("userBtn");
+	deactivateElements(btns);
+}
+
+function activateSignupForm() {
+	document.getElementById("signup-form").style.display = "inline-block";
+	let btns = document.getElementsByClassName("userBtn");
+	deactivateElements(btns);
+
+}
+
+
+function deactivateElements(elements) {
+	let i;
+	for (i = 0; i < elements.length; i++) {
+		elements[i].style.display = "none";
+	}
 
 }
 

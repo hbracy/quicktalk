@@ -39,52 +39,93 @@ banner {
 	background-color: #ffc002;
 }
 
-.right {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
+i {
+  border: solid white;
+  border-width: 0 10px 10px 0;
+  display: inline-block;
+  padding: 10px;
 }
 
-.left {
+myButton {
+	margin-top:10%;
+	margin-bottom: 10%;
+	display: block;
+	background-color: blue;
+	cursor: pointer;
+}
+
+myButton:hover {
+/*	background-color: #4286f4;*/
+	filter: brightness(120%);
+}
+
+.point-right {
+  -webkit-transform: rotate(-45deg);
+	color: black;
+}
+
+.arrow {
+	position: absolute;
+}
+
+.point-left {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 }
 
-.up {
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
+#choice {
 }
 
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-} 
-
-#learnButton {
-	background-color: #9602ff;
-
-}
-
-#landing {
-/*	display: table;*/
-}
-
-#left {
+.left {
 	left: 0;
 	background-color: #1D7A79;
 }
 
-#right {
+.right {
 	right: 0;
 }
 
-#teachButton {
+.top {
+	margin: 0;
 	top: 0;
 	background-color: #C30713;
-
 }
-#learnButton {
+.bottom {
+	margin: 0;
 	bottom: 0;
 	background-color: #042A81;
+}
+
+.centered {
+	margin: 0;
+  position: relative;
+  top: 50%;
+	text-align: center;
+	
+}
+
+.signup {
+	background-color:cadetblue;
+}
+
+.login {
+	background-color:cadetblue;
+
+}
+
+
+.userBtn {
+	text-align: center;
+	padding: 10%;
+	
+}
+
+.btn {
+	text-align: center;
+}
+
+.user-form {
+	display: none;
 }
 
 /* Split the screen in half */
@@ -118,7 +159,7 @@ banner {
 	position: absolute;
 	cursor: pointer;
 	color: white;
-	text-align: center;
+/*	text-align: center;*/
 	display: table-cell;
 	vertical-align: middle;
 }
