@@ -1,10 +1,15 @@
 "use strict";
 //------Global variables-----
 var clientUsername = "";
+var clientEmail = "";
+var clientIsLoggedIn = false;
 var connection = null;
-//const serverHostname = '192.168.1.3';
-const serverHostname = '35.237.137.132';
+
+//const serverHostname = '192.168.1.3'; // Home
+const serverHostname = '35.237.137.132'; // Cloud
+//const serverHostname = '192.168.0.109'; // Alex's
 const serverPort = 3000;
+
 const socket = io("http://" + serverHostname + ":" + serverPort);
 
 socket.on('serverConnection', function(msg) {
@@ -13,6 +18,30 @@ socket.on('serverConnection', function(msg) {
 
 socket.on('userInputError', function(msg) {
 	alert(msg);
+});
+
+socket.on('goodSignUp', function(msg) {
+	// REMEMBER TO LOG IN THE USER HERE
+	alert(msg);
+});
+
+socket.on('loginStatus', function(loginMessage) {
+	if (loginMessage.status) {
+		clientUsername = loginMessage.username;
+		clientEmail = loginMessage.email;
+		// TODO: Eventually change the password field from null,
+		// by passing it in when retrieved from the server after
+		// authentication
+		saveAccountInfo(loginMessage.username, loginMessage.email, null);
+		alert("YOU HAVE LOGGED IN");
+		
+	} else {
+		alert("FAILED TO LOGIN");
+	}
+});
+
+socket.on('waitingForAnswer', function(waitMessage) {
+	alert("WAITING FOR A PARTNER TO ANSWER YOUR CALL");
 });
 
 socket.on('matched', function(msg) {
@@ -80,44 +109,63 @@ socket.on('matched', function(msg) {
 
 });
 
-function teachCall() {
-		// connection is opened and ready to use
-		clientUsername = document.getElementById("email-input").value
-		const teachMessage = {
-			username: clientUsername,
-			kind: 'teach',
-			options: Array.from(wantToTeachList), //Because stringify doesn't work with sets
-		}
-		socket.emit('matchRequest', teachMessage);
+function call(messageKind) {
+	let accountInfo = getAccountInfo();
+	if (!getAccountInfo()) {
+		alert("USER MUST FIRST LOGIN");
+		return;
+	}
+	
+	if (optionList.size == 0) {
+		alert("USER MUST FIRST CHOOSE A LANGUAGE");
+		return;
+
+	}
+	
+	const message = {
+		username: accountInfo.username,
+		kind: messageKind,
+		options: Array.from(optionList), //Because stringify doesn't work with sets
+	}
+	socket.emit('matchRequest', message);
 }
 
-function learnCall() {
-
-		clientUsername = document.getElementById("email_input").value
-		// connection is opened and ready to use
-		const learnMessage = {
-			username: clientUsername,
-			kind: 'learn',
-			options: Array.from(wantToLearnList),
-		}
-		
-		socket.emit('matchRequest', learnMessage);
+function getAccountInfo() {
+	let accountInfo = localStorage.getItem('accountInfo');
+	if (!accountInfo) {
+		return false;
+	}
+	
+	accountInfo = atob(accountInfo);
+	accountInfo = JSON.parse(accountInfo);
+	return accountInfo;
+	
 }
 
+function saveAccountInfo(givenUsername, givenEmail, givenPassword) {
+	let accountInfo = {
+		username: givenUsername,
+		email: givenEmail,
+		password: givenPassword
+	}
+	
+	accountInfo = JSON.stringify(accountInfo);
+	accountInfo = btoa(accountInfo);
+	localStorage.setItem('accountInfo', accountInfo);
+	
+}
 
 
 function login() {
-	const form = document.getElementById("login-form");
-	const inputEmail = form.getElementsByClassName("email-input")[0].value;
-	const inputPasswords = form.getElementsByClassName("password-input");
+	const inputEmail = document.getElementById("email-input").value;
+	const inputPassword = document.getElementById("password-input");
 	
-	if (userFormIsNotValid("username", inputEmail, inputPasswords)) {
+	if (userFormIsNotValid("username", inputEmail, inputPassword)) {
 		return;
 	}
-
 	const loginMessage = {
 		email: inputEmail, 
-		password: inputPasswords[0].value
+		password: inputPassword.value
 	};
 
 	socket.emit('login', loginMessage);
@@ -125,15 +173,18 @@ function login() {
 }
 
 function signUp() {
-	const form = document.getElementById("signup-form");
-	const inputUsername = document.getElementById("username-input").value;
-	const inputEmail = form.getElementsByClassName("email-input")[0].value;
-	const inputPasswords = form.getElementsByClassName("password-input");
+	const inputUsername = document.getElementById("username-signup-input").value;
+	const inputEmail = document.getElementById("email-signup-input").value;
+	const inputPasswords = document.getElementsByClassName("signup-password");
 	
 	if (userFormIsNotValid(inputUsername, inputEmail, inputPasswords)) {
 		return;
 	}
 
+	if (passwordsNotEqual(inputPasswords)) {
+		return;
+	}
+	
 	const signUpMessage = {
 		username: inputUsername, 
 		email: inputEmail, 
@@ -141,57 +192,57 @@ function signUp() {
 	};
 
 	socket.emit('signup', signUpMessage);
-
+	saveAccountInfo(inputUsername, inputEmail, inputPasswords[0].value);
 }
 
 
-function userFormIsNotValid(inputUsername, inputEmail, inputPasswords) {
-		console.log(inputPasswords.length);
+function userFormIsNotValid(inputUsername, inputEmail, inputPassword) {
 
-	if (!inputUsername || !inputEmail || !inputPasswords) {
+	if (!inputUsername || !inputEmail || !inputPassword) {
 	alert("You left a field blank");
 	return true;
 	}
 	
+	return false;
+}
+
+function passwordsNotEqual(inputPasswords) {
 	let i;
 	let first = inputPasswords[0].value;
 	for (i = 0; i < inputPasswords.length; i++) {
-		console.log(first, inputPasswords[i].value)
 		if (first != inputPasswords[i].value) {
 			alert("Passwords must be the same.");
 			return true;
 		}
 	}
-	return false;
 }
 
 
 
 function goToLearn() {
 	// Check if signed in
-	window.location = "#learn";
-	document.getElementById("learn").style.display = "inline-block";
-	document.getElementById("choice").style.display = "none";
+	window.location = "learn.html";
 }
 
 function goToTeach() {
 	// Check if signed in
-	window.location = "#teach";
-	document.getElementById("teach").style.display = "inline-block";
-	document.getElementById("choice").style.display = "none";
+	window.location.href = "teach.html";
 
 }
 
 function activateLoginForm() {
-	document.getElementById("login-form").style.display = "inline-block";
-	let btns = document.getElementsByClassName("userBtn");
-	deactivateElements(btns);
+
+	document.getElementById("login-modal").style.display = "block";
+//	let btns = document.getElementsByClassName("userBtn");
+//	deactivateElements(btns);
+}
+
+function deactivate(element) {
+	element.style.display = "none";
 }
 
 function activateSignupForm() {
-	document.getElementById("signup-form").style.display = "inline-block";
-	let btns = document.getElementsByClassName("userBtn");
-	deactivateElements(btns);
+	document.getElementById("signup-modal").style.display = "block";
 
 }
 
@@ -204,8 +255,7 @@ function deactivateElements(elements) {
 
 }
 
-let wantToTeachList = new Set();
-let wantToLearnList = new Set();
+let optionList = new Set();
 
 
 /* When the user clicks on the button, 
@@ -215,33 +265,33 @@ function wantToLearn() {
 
 }
 
-function addLearn(id) {
-	wantToLearnList.add(id);
-	console.log(wantToLearnList);
+function addOption(element) {
+	optionList.add(element.id);
+	console.log(optionList);
 }
 
-function wantToTeach() {
-	document.getElementById("teachDropdown").classList.toggle("show");
-}
 
-function addTeach(id) {
-	wantToTeachList.add(id);
-	console.log(wantToTeachList);
-}
 
+function moveTo(from) {
+	document.getElementById(from.dataset.toActivate).style.display = "block";	document.getElementById(from.dataset.toDeactivate).style.display = "none";
+}
 
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-	if (!event.target.matches('.dropbtn')) {
+	if (!event.target.classList.contains('dropdown')) {
 		let dropdowns = document.getElementsByClassName("dropdown-content");
 		let i;
 		for (i = 0; i < dropdowns.length; i++) {
 			let openDropdown = dropdowns[i];
-			if (openDropdown.classList.contains('show')) {
-				openDropdown.classList.remove('show');
+			if (openDropdown.style.display != "none") {
+
+				openDropdown.style.display = "none";
 			}
 		}
+	}
+	if (event.target.classList.contains("modal")) {
+		event.target.style.display = "none";
 	}
 }
 

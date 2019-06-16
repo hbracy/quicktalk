@@ -6,10 +6,14 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 const mongoose = require('mongoose');
 const User = require('./user-schema');
+const bcrypt = require('bcrypt-nodejs');
+
 
 //-----Global Variables------
-//const hostname = '216.227.1.113'; // Change if change servers
-const hostname = '35.237.137.132';
+//const hostname = '216.227.1.113'; // Home
+const hostname = '35.237.137.132'; // Cloud
+//const hostname = '192.168.0.109'; // Alex's
+
 const localhost = '0.0.0.0'
 const port = 3000;
 const mongoDB = 'mongodb://' + localhost + '/my_database';
@@ -17,6 +21,8 @@ let clients = {};
 let learnerDict = {};
 let teacherDict = {};
 const connectedPeers = new Set();
+SALT_WORK_FACTOR = 10;
+
 
 io.origins('*:*')
 // Start Listening
@@ -36,29 +42,119 @@ io.on('connection', function (socket) {
 	// When the connection is opened
 	let userName = "";
 	clients[socket.id] = socket;
-	console.log("CONNECTION", Object.keys(clients).length);
+	
+	// Make appropriate logs
+	let ipAddress = socket.request.connection.remoteAddress;
+	console.log('NEW CONNECTION FROM', ipAddress, "ON", new Date());
+	console.log("CURRENTLY", Object.keys(clients).length, "CONNECTIONS");
 	socket.emit('serverConnection', "CONNECTED TO SERVER");
 	
 	// Register listeners
 	onClientDisconnect(socket);
 	onMatchRequest(socket);
 	onSignUp(socket);
+	onLogin(socket);
+	authenticateSession(socket);
 });
 
+function authenticateSession(socket) {
+	socket.on('authenticateSession', function(data) {
+		let loggedIn = validateEmailAndPassword(data.email, data.password).then(function(isMatch) {
+			if(isMatch) {
+				console.log("SUCCESSFUL LOGIN");
+			} else {
+				console.log("FAILED LOGIN");
+			}
+		}).catch(function(err) {
+			console.log(err);
+		});
+	});
+}
+
+function onLogin(socket) {
+	socket.on('login', function(data) {
+		let loggedIn = validateEmailAndPassword(data.email, data.password).then(function(isMatch) {
+			
+			
+			let loginMessage = {
+				status: false,
+				username: null,
+				email: null,
+			}
+			
+			if(isMatch) {
+				loginMessage.status = true;
+				loginMessage.username = isMatch.username;
+				loginMessage.email = isMatch.email;
+			} else {
+				console.log("FAILED LOGIN");
+				socket.emit('loginStatus', loginMessage);
+			}
+			
+			socket.emit('loginStatus', loginMessage);
+			
+		}).catch(function(err) {
+			console.log(err);
+			socket.emit('loginStatus', false);
+		});
+	});
+}
+
+// When a user attempts a sign up. Invalid input will be caught.
 function onSignUp(socket) {
 	socket.on('signup', function(data) {
 		let newUser = new User({username: data.username, email: data.email, password: data.password});
 		newUser.save().then(function() {
-			console.log("NEW USER", newUser.username,"SIGNED UP");
-			socket.emit('goodSignUp');
+			let successMessage = "NEW USER " + newUser.username +" SIGNED UP";
+			console.log(successMessage);
+			socket.emit('goodSignUp', successMessage);
 			
 		}).catch(function(err) {
-			const errorMessage = err.errors[Object.keys(err.errors)[0]].message;
-			console.log(errorMessage);
-			socket.emit('badSignUp', errorMessage);
-			
+			userInputError(socket, err);
 		});
 	});
+}
+
+function validateEmailAndPassword(inputEmail, inputPassword) {
+	return User.findOne({ email: inputEmail}, function (err, user){
+		if (err || !user) {
+			console.log(inputEmail);
+			return false;
+		}
+		user.comparePassword(inputPassword, function(err, isMatch) {
+			return isMatch;
+		});
+	});
+}
+
+//function getLoginToken(givenEmail, givenUsername, givenPassword) {
+//	let token = hashString(givenEmail + givenUsername + givenPassword);
+//	console.log(token);
+//	User.findOneAndUpdate({username: givenUsername}, {loginToken: token}, {upsert:true});
+//	return token;
+//}
+
+function hashString(toHash) {
+		// generate a salt
+	bcrypt.genSaltSync(SALT_WORK_FACTOR, function(err, salt) {
+
+			// hash the password using our new salt
+			bcrypt.hashSync(toHash, salt, null, function(err, hash) {
+					// override the cleartext password with the hashed one
+				toHash = hash;
+			
+			});
+	});
+	
+	return toHash;
+}
+
+
+// A helper function for whenever we want to catch a database error due to user input
+function userInputError(socket, err) {
+			const errorMessage = err.errors[Object.keys(err.errors)[0]].message;
+			console.log(errorMessage);
+			socket.emit('userInputError', errorMessage);
 }
 
 // When a client, for example, refreshes a page
@@ -80,7 +176,7 @@ function onMatchRequest(socket) {
 			return;
 		}
 		
-		console.log("MESSAGE FROM: " + payload.username);
+		console.log("CALL FROM: " + payload.username);
 		payload.socketId = socket.id;
 		let match = handleCallPayload(payload);
 
@@ -88,7 +184,7 @@ function onMatchRequest(socket) {
 			console.log(match);
 			setupCall(match, socket);
 		} else {
-			putOnWaitingList(payload.username)
+			putOnWaitingList(payload.username, socket);
 		}
 
 	});
@@ -165,8 +261,14 @@ function setupCall(match, socket) {
 }
 
 // For when there is no match and the usermust wait
-function putOnWaitingList(username) {
+function putOnWaitingList(username, socket) {
 	console.log("NO MATCH MADE, PUTTING", username, "ON WAITING LIST");
+	
+	let waitMessage = {
+		waiting: true
+	}
+	
+	socket.emit('waitingForAnswer', waitMessage);
 }
 
 // The following two classes are a precaution in case we want to extend them.

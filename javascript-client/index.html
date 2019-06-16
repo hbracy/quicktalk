@@ -4,26 +4,89 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="styles.css" type="text/css">
 	</head>
+
 	<body>
-		
-		<div class="right split-vertical">
-			<div id="teach" class="slide-in">
-				<div class="dropdown">
-				<button onclick="wantToTeach()" class="dropbtn">What can you teach?</button>
-				<div id="teachDropdown" class="dropdown-content">
-					<a onclick="addTeach(this.id)" id=english>English</a>
-					<a onclick="addTeach(this.id)" id=chinese>Chinese</a>
-					<a onclick="addTeach(this.id)" id=spanish>Spanish</a>
-					<a onclick="addTeach(this.id)" id=portuguese>Portuguese</a>
-					<a onclick="addTeach(this.id)" id=russian>Russian</a>
-					<a onclick="addTeach(this.id)" id=arabic>Arabic</a>
-				</div>
-				</div>
-				<div class="submit">
-					<button onclick="teachCall()" class="subbtn">CALL</button>
-				</div >
-				<video width="320" height="240" id="incomingVideo"></video>
+		<!--
+		<div class="right split-vertical centered">
+			
+			<div id="choice">
+				<myButton class= "top gotobtn red"  onclick="goToTeach()">
+					<div class="centered">
+						<div  id="teachButton" class="btn">START TEACHING</div>
+						<i class="arrow point-right"></i>
+					</div>
+				</myButton>
+				<myButton class="bottom gotobtn blue" onclick="goToLearn()">
+					<div class="centered">
+						<div id="learnButton" class="btn">START LEARNING</div>
+						<i class="arrow point-right"></i>
+					</div>
+				</myButton>
 			</div>
+			
+			<div id="teach" class="slide-in">
+				<myButton class= "top gotobtn red dropdown"  onclick="wantToTeach()">
+					<div class="centered">
+						<div class="dropdown">What can you teach?</div>
+						<div id="teachDropdown" class="dropdown-content">
+							<myButton onclick="addTeach(this.id)" id=english>English</myButton>
+							<myButton onclick="addTeach(this.id)" id=chinese>Chinese</myButton>
+							<myButton onclick="addTeach(this.id)" id=spanish>Spanish</myButton>
+							<myButton onclick="addTeach(this.id)" id=portuguese>Portuguese</myButton>
+							<myButton onclick="addTeach(this.id)" id=russian>Russian</myButton>
+							<myButton onclick="addTeach(this.id)" id=arabic>Arabic</myButton>
+						</div>
+							<i class="arrow point-right"></i>
+					</div>
+				</myButton>
+				
+				<div class="centered">
+					<div class="">
+						<div class="back-button  ">
+							<div class="arrow-left" data-to-activate="choice" data-to-deactivate="teach" onclick="moveTo(this)"></div>
+						</div>
+						<div class="">
+							<myButton onclick="teachCall()" class="subbtn">CALL</myButton>
+						</div >
+					</div>
+					<video width="320" height="240" id="incomingVideo"></video>
+				</div>
+
+			</div>
+			
+		
+			<div id="" class="slide-in">
+				<div class="dropdown">
+					<myButton onclick="wantToTeach()" class="dropbtn">What can you teach?</myButton>
+					<div id="teachDropdown" class="dropdown-content">
+						<a onclick="addTeach(this.id)" id=english>English</a>
+						<a onclick="addTeach(this.id)" id=chinese>Chinese</a>
+						<a onclick="addTeach(this.id)" id=spanish>Spanish</a>
+						<a onclick="addTeach(this.id)" id=portuguese>Portuguese</a>
+						<a onclick="addTeach(this.id)" id=russian>Russian</a>
+						<a onclick="addTeach(this.id)" id=arabic>Arabic</a>
+					</div>
+				</div>
+				
+				
+		
+				<div class="centered">
+					<div class="inline-blocked">
+						<div class="back-button  inline-blocked">
+							<div class="arrow-left" data-to-activate="choice" data-to-deactivate="teach" onclick="moveTo(this)"></div>
+						</div>
+						<div class="">
+							<myButton onclick="teachCall()" class="subbtn">CALL</myButton>
+						</div >
+					</div>
+					<video width="320" height="240" id="incomingVideo"></video>
+				</div>
+			</div>
+			
+			
+			
+			
+			
 			<div id="learn" class="slide-in split-horizontal">
 				<div class="dropdown">
 					<button onclick="wantToLearn()" class="dropbtn">What do you want to learn?</button>
@@ -42,20 +105,6 @@
 				<video width="320" height="240" id="incomingVideo"></video>
 			</div>
 			
-			<div id="choice">
-					<myButton class= "top gotobtn"  onclick="goToTeach()">
-						<div class="centered">
-							<div  id="teachButton" class="btn">START TEACHING</div>
-							<i class="arrow point-right"></i>
-						</div>
-					</myButton>
-					<myButton class="bottom gotobtn" onclick="goToLearn()">
-						<div class="centered">
-							<div id="learnButton" class="btn">START LEARNING</div>
-							<i class="arrow point-right"></i>
-						</div>
-					</myButton>
-			</div>
 		</div>
 			
 		<div class="left split-vertical centered">
@@ -99,6 +148,96 @@
 			</div>
 			
 		</div>
+-->
+		
+<!--			<div id="window-box">-->
+				
+				<div id="header-box">
+					<myButton id="about-header" class="cells" onclick="window.location.href='index.html'">
+						<div class="text linked">About</div>
+					</myButton>
+					<myButton id="header-cell" class="cells" onclick="window.location.href='index.html'">
+						<div class="text linked">QuickTalk</div>
+					</myButton>
+					<myButton id="profile-cell" class="cells" onclick="window.location.href='index.html'">
+						<div class="text linked">Profile</div>
+					</myButton>
+				</div>
+				<div id="app-box">
+					<div id="left-box">
+						<div id="about-cell" class="cells">
+							<div class="about text">QuickTalk is a way to practice your language skills right now. Just sign up, call, and chat.</div>
+						</div>
+						<myButton id="login-cell" class="cells" onclick="activateLoginForm()"><div class="text">LOGIN</div></myButton>
+						<myButton id="signup-cell" class="cells" onclick="activateSignupForm()"><div class="text">SIGN UP</div></myButton>
+					</div>
+					<div id="right-box">
+						<myButton id="teach-cell" class="cells" onclick="goToTeach()"><div class="text">TEACH</div></myButton>
+						<myButton id="learn-cell" class="cells" onclick="goToLearn()"><div class="text">LEARN</div></myButton>
+					</div>
+				</div>
+				
+				<div id="footer-box">
+					<div id="footer-cell" class="cells"><div class="text">All rights reserved</div></div>
+				</div>
+				
+		<div id="login-modal" class="modal">
+			<span onclick="deactivate(this.parentNode)" class="close" title="Close Modal">&times;</span>
+			<form class="modal-content animate">
+				<div class="container">
+					<label for="email">
+						<b>Email</b>
+					</label>
+					<input id="email-input" type="text" placeholder="Enter Email" name="email" required autocomplete="username">
+					<label for="password">
+						<b>Password</b>
+					</label>
+					<input id="password-input"type="password" placeholder="Enter password" name="password" required autocomplete="current-password">
+					<myButton class="submit" onclick="login()">Login</myButton>
+<!--
+					<label>
+						<input type="checkbox" checked="checked" name="remember">Remember me
+					</label>
+-->
+				</div>
+<!--
+				<div class="container">
+					<span class="password">
+						Forgot <a href="#"> password?</a>
+					</span>
+				</div>
+-->
+			</form>
+		</div>
+		
+		<div id="signup-modal" class="modal">
+			<span onclick="deactivate(this.parentNode)" class="close" title="Close Modal">&times;</span>
+			<form class="modal-content animate">
+				<div class="container">
+					<label for="email">
+						<b>Email</b>
+					</label>
+					<input id="email-signup-input" type="text" placeholder="Enter Email" name="email" required>
+					<label for="username">
+						<b>Username</b>
+					</label>
+					<input id="username-signup-input" type="text" placeholder="Enter Username" name="username" required autocomplete="username">
+					<label for="password">
+						<b>Password</b>
+					</label>
+					<input id="password-signup-input1" class="signup-password" type="password" placeholder="Enter password" name="password" required autocomplete="current-password">
+					<label for="password">
+						<b>Confirm</b>
+					</label>
+					<input id="password-signup-input2" class="signup-password" type="password" placeholder="Confirm password" name="password" required autocomplete="current-password">
+					<myButton class="submit" onclick="signUp()">SIGN UP</myButton>
+					<label>
+						<input type="checkbox" checked="checked" name="remember">Remember me
+					</label>
+				</div>
+			</form>
+		</div>		
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 		<script type="text/javascript" src='http://35.237.137.132:3000/socket.io/socket.io.js'>
 		</script>
