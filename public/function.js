@@ -14,8 +14,6 @@ const serverPort = 3000;
 
 const socket = io("https://" + serverHostname);
 
-console.log(socket);
-
 socket.on('serverConnection', function(msg) {
 	console.log(msg);
 });
