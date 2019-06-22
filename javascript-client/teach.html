@@ -1,18 +1,19 @@
 <!DOCTYPE html>
+<meta charset="utf-8"/>
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="styles.css" type="text/css">
 	</head>
-	<body>				
+	<body id='body' class="centered">				
 		<div id="header-box">
-			<myButton id="about-header" class="cells" onclick="window.location.href='index.html'">
+			<myButton id="about-header" class="cells" onclick="window.location.href='about.html'">
 				<div class="text linked">About</div>
 			</myButton>
 			<myButton id="header-cell" class="cells" onclick="window.location.href='index.html'">
 				<div class="text linked">QuickTalk</div>
 			</myButton>
-			<myButton id="profile-cell" class="cells" onclick="window.location.href='index.html'">
+			<myButton id="profile-cell" class="cells" onclick="activateProfile()">
 				<div class="text linked">Profile</div>
 			</myButton>
 		</div>
@@ -26,44 +27,60 @@
 						<myButton id="english" class="scroll-button cells" onclick="addOption(this)">
 							English
 						</myButton>
-						<myButton id="chinese" class="scroll-button cells">
+						<myButton id="chinese" class="scroll-button cells" onclick="addOption(this)">
 							Chinese
 						</myButton>
-						<myButton id="spanish" class="scroll-button cells">
+						<myButton id="spanish" class="scroll-button cells" onclick="addOption(this)">
 							Spanish
 						</myButton>
-						<myButton id="french" class="scroll-button cells">
+						<myButton id="french" class="scroll-button cells" onclick="addOption(this)">
 							French
 						</myButton>
-						<myButton id="russian" class="scroll-button cells">
+						<myButton id="russian" class="scroll-button cells" onclick="addOption(this)">
 							Russian
 						</myButton>
-						<myButton id="arabic" class="scroll-button cells">
+						<myButton id="arabic" class="scroll-button cells" onclick="addOption(this)">
 							Arabic
 						</myButton>
-						<myButton id="portuguese" class="scroll-button cells">
+						<myButton id="portuguese" class="scroll-button cells" onclick="addOption(this)">
 							Portuguese
 						</myButton>
-						<myButton id="hindi" class="scroll-button cells">
+						<myButton id="hindi" class="scroll-button cells" onclick="addOption(this)">
 							Hindi
 						</myButton>
-						<myButton id="german" class="scroll-button cells">
+						<myButton id="german" class="scroll-button cells" onclick="addOption(this)">
 							German
 						</myButton>
 					</div>
 				</div>
 			</div>
 			<div id="right-box">
-				<myButton id="teach-call-cell" class="cells" onclick="call('teach')"><div class="text">CALL</div></myButton>
+				<myButton id="call-cell" class="cells" onclick="call('teach')"><div class="text">CALL</div></myButton>
+				 <audio id="incomingAudio" autoplay></audio>
 			</div>
 		</div>
+		
+<!--		<div id="loading-circle" class="loading-circle"><div></div></div>-->
+		
 		<div id="footer-box">
 			<div id="footer-cell" class="cells"><div class="text">All rights reserved</div></div>
-		</div>		
+		</div>
+		
+		<div id="profile-modal" class="modal">
+			<span onclick="deactivate(this.parentNode)" class="close" title="Close Modal">&times;</span>
+			<div class="modal-content animate">
+				<div id="profile-container" class="container dark-text">
+					<div id="profile-username" class="info dark-text"></div>
+					<myButton id="logout-button" class="submit" onclick="logout()">Logout</myButton>
+				</div>
+			</div>
+		</div>
+
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 		<script type="text/javascript" src='http://35.237.137.132:3000/socket.io/socket.io.js'>
 		</script>
-		<script src="https://github.com/t-mullen/simple-signal/releases/download/2.1.0/simple-signal-client.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.3.0/simplepeer.min.js"></script>
 		<script type="text/javascript" src="function.js"></script>
 	</body>
 </html>

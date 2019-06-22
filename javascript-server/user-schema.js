@@ -19,6 +19,11 @@ const UserSchema = new Schema({
 		type: String,
 		required: true
 	},
+	
+	availableTime: {
+		type: Number,
+		default: 3600
+	}
 //	loginToken: {
 //		type: String
 //	}
