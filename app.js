@@ -17,7 +17,7 @@ const bcrypt = require('bcrypt-nodejs');
 const hostname = '192.168.0.109'; // Alex's
 
 const localhost = '0.0.0.0'
-const port = 3000;
+const port = process.env.PORT || 3000;
 const mongoDB = 'mongodb://' + localhost + '/my_database';
 let clients = {};
 let learnerDict = {};
@@ -33,7 +33,7 @@ server.listen(port, localhost, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 // Connect to mongoDB
-mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || mongoDB, { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 //Get the default connection
 const dbConnection = mongoose.connection;
