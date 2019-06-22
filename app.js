@@ -1,9 +1,11 @@
 "use strict";
 //------Imports------
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http');
 const server = http.Server(app);
 const io = require('socket.io')(server);
+const path = require('path');
 const mongoose = require('mongoose');
 const User = require('./user-schema');
 const bcrypt = require('bcrypt-nodejs');
@@ -23,8 +25,9 @@ let teacherDict = {};
 let userChatSessions = {};
 SALT_WORK_FACTOR = 10;
 
+app.use(express.static(path.join(__dirname, 'public')));
 
-io.origins('*:*')
+//io.origins('*:*')
 // Start Listening
 server.listen(port, localhost, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
