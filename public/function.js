@@ -12,7 +12,7 @@ const serverHostname = 'thequicktalk.herokuapp.com'
 
 const serverPort = 3000;
 
-const socket = io("http://" + serverHostname + ":" + serverPort);
+const socket = io("https://" + serverHostname + ":" + serverPort);
 
 socket.on('serverConnection', function(msg) {
 	console.log(msg);
