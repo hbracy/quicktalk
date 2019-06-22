@@ -45,8 +45,7 @@
 
 #bottom-box {
   display: flex;
-	flex-wrap: wrap;
-
+/*	flex-wrap: wrap;*/
 /*  box-sizing: border-box;*/
 	height: 50%;
 	width: 100%;
@@ -91,6 +90,12 @@
 
 #info-cell {
 	background-color: mediumpurple;
+  width: 100%;
+
+}
+
+#info-cell2 {
+	background-color: indianred;
   width: 100%;
 
 }
