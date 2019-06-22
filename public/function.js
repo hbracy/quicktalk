@@ -7,7 +7,9 @@ var connection = null;
 
 //const serverHostname = '192.168.1.3'; // Home
 //const serverHostname = '35.237.137.132'; // Cloud
-const serverHostname = '192.168.0.109'; // Alex's
+//const serverHostname = '192.168.0.109'; // Alex's
+const serverHostname = 'thequicktalk.herokuapp.com'
+
 const serverPort = 3000;
 
 const socket = io("http://" + serverHostname + ":" + serverPort);
