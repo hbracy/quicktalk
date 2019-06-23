@@ -7,8 +7,8 @@ var connection = null;
 
 //const serverHostname = '192.168.1.3'; // Home
 //const serverHostname = '35.237.137.132'; // Cloud
-const serverHostname = 'http://192.168.0.109:3000'; // Alex's
-//const serverHostname = 'https://thequicktalk.herokuapp.com'
+//const serverHostname = 'http://192.168.0.109:3000'; // Alex's
+const serverHostname = 'https://thequicktalk.herokuapp.com'
 
 const serverPort = 3000;
 

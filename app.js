@@ -14,8 +14,8 @@ const bcrypt = require('bcrypt-nodejs');
 //-----Global Variables------
 //const hostname = '216.227.1.113'; // Home
 //const hostname = '35.237.137.132'; // Cloud
-const hostname = '192.168.0.109'; // Alex's
-//const hostname = 'thequicktalk.herokuapp.com'
+//const hostname = '192.168.0.109'; // Alex's
+const hostname = 'thequicktalk.herokuapp.com'
 
 const localhost = '0.0.0.0'
 const port = process.env.PORT || 3000;
