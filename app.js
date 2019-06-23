@@ -14,8 +14,8 @@ const bcrypt = require('bcrypt-nodejs');
 //-----Global Variables------
 //const hostname = '216.227.1.113'; // Home
 //const hostname = '35.237.137.132'; // Cloud
-//const hostname = '192.168.0.109'; // Alex's
-const hostname = 'thequicktalk.herokuapp.com'
+const hostname = '192.168.0.109'; // Alex's
+//const hostname = 'thequicktalk.herokuapp.com'
 
 const localhost = '0.0.0.0'
 const port = process.env.PORT || 3000;
@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //io.origins('*:*')
 // Start Listening
 server.listen(port, localhost, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+  myLog(`Server running at http://${hostname}:${port}/`);
 });
 // Connect to mongoDB
 mongoose.connect(process.env.MONGODB_URI || mongoDB, { useNewUrlParser: true });
@@ -47,8 +47,8 @@ io.on('connection', function (socket) {
 	clients[socket.id] = new Client(socket);
 	// Make appropriate logs
 	let ipAddress = socket.request.connection.remoteAddress;
-	console.log('NEW CONNECTION FROM', ipAddress, "ON", new Date());
-	console.log("CURRENTLY", Object.keys(clients).length, "CONNECTIONS");
+	myLog('NEW CONNECTION FROM', ipAddress, "ON", new Date());
+	myLog("CURRENTLY", Object.keys(clients).length, "CONNECTIONS");
 	socket.emit('serverConnection', "CONNECTED TO SERVER");
 	
 	// Register listeners
@@ -64,7 +64,7 @@ io.on('connection', function (socket) {
 function onLogout(socket) {
 	socket.on('logout', function() {
 		let loggedOutClient = clients[socket.id];
-		console.log(loggedOutClient.username, "LOGGING OUT")
+		myLog(loggedOutClient.username, "LOGGING OUT")
 		loggedOutClient.logout();
 		clients[socket.id] = loggedOutClient;
 	});
@@ -87,12 +87,12 @@ function onClientDisconnect(socket) {
 		delete clients[socket.id];
 		delete learnerDict[socket.id];
 		delete teacherDict[socket.id];
-		console.log("USER DISCONNECTED");
+		myLog("USER DISCONNECTED");
 	});
 }
 
 function disconnectPeer(socket) {
-	console.log("PEER DISCONNECTED");
+	myLog("PEER DISCONNECTED");
 	let client = clients[socket.id];
 	let clientPeer = clients[client.peer];
 	logSession(client);
@@ -107,7 +107,7 @@ function disconnectPeer(socket) {
 
 function onPeerConnect(socket) {
 	socket.on('peerConnect', function(data) {
-		console.log("PEER CONNECTED");
+		myLog("PEER CONNECTED");
 		clients[socket.id].isChatting = true;
 		clients[socket.id].startTime = new Date();
 		emitAvailableTime(socket);
@@ -116,7 +116,7 @@ function onPeerConnect(socket) {
 
 function emitAvailableTime(socket) {
 	User.findOne({'username': clients[socket.id].username}, function (err, user) {
-		if (err) return console.log(err);
+		if (err) return myLog(err);
 		let availableTime = user.availableTime;
 		
 		let timeMessage = {
@@ -131,13 +131,13 @@ function emitAvailableTime(socket) {
 // FOR HANG UP BUTTON
 //function onPeerDisconnect(socket) {
 //	socket.on('peerDisconnect', function(data) {
-//		console.log("PEER DISCONNECTED");
+//		myLog("PEER DISCONNECTED");
 //		let client = clients[socket.id];
 //		logSession(client);
 //		//DATABASE
 //		client.isChatting = false;
 //		clients[socket.id] = client;
-//		console.log(client.peer);
+//		myLog(client.peer);
 //		clients[client.peer].isChatting = false;
 //	});
 //}
@@ -151,7 +151,7 @@ function logSession (client) {
 	}
 	
 	User.findOne({'username': client.username}, function (err, user) {
-		if (err) return console.log(err);
+		if (err) return myLog(err);
 			user.availableTime += secondsToAdd;
 			if (user.availableTime < 0) {
 				user.availableTime = 0;
@@ -181,13 +181,13 @@ function authenticateSession(socket, email, password) {
 			socket.emit('loginStatus', loginMessage);
 			
 		} else {
-			console.log("FAILED LOGIN");
+			myLog("FAILED LOGIN");
 			socket.emit('loginStatus', loginMessage);
 		}
 
 		
 	}).catch(function(err) {
-		console.log(err);
+		myLog(err);
 		socket.emit('loginStatus', false);
 	});
 }
@@ -208,7 +208,7 @@ function onSignUp(socket) {
 			let client = clients[socket.id];
 			loginClient(client, newUser);
 			let successMessage = "NEW USER " + newUser.username +" SIGNED UP";
-			console.log(successMessage);
+			myLog(successMessage);
 			socket.emit('signedUp', successMessage);
 			authenticateSession(socket, data.email, data.password);
 
@@ -229,7 +229,7 @@ function loginClient(client, info) {
 function validateEmailAndPassword(inputEmail, inputPassword) {
 	return User.findOne({ email: inputEmail}, function (err, user){
 		if (err || !user) {
-			console.log(inputEmail);
+			myLog(inputEmail);
 			return false;
 		}
 		user.comparePassword(inputPassword, function(err, isMatch) {
@@ -240,7 +240,7 @@ function validateEmailAndPassword(inputEmail, inputPassword) {
 
 //function getLoginToken(givenEmail, givenUsername, givenPassword) {
 //	let token = hashString(givenEmail + givenUsername + givenPassword);
-//	console.log(token);
+//	myLog(token);
 //	User.findOneAndUpdate({username: givenUsername}, {loginToken: token}, {upsert:true});
 //	return token;
 //}
@@ -263,14 +263,14 @@ function hashString(toHash) {
 
 // A helper function for whenever we want to catch a database error due to user input
 function userInputError(socket, err) {
-	console.log(err);
+	myLog(err);
 	const errorMessage = err.errors[Object.keys(err.errors)[0]].message;
 	socket.emit('userInputError', errorMessage);
 }
 
 function getAvailableTime(email) {
 	User.findOne({'email': email}, function (err, user) {
-		if (err) return console.log(err);
+		if (err) return myLog(err);
 		return user.availableTime;
 	});
 }
@@ -291,12 +291,12 @@ function onMatchRequest(socket) {
 			return;
 		}
 		
-		console.log("CALL FROM: " + payload.username);
+		myLog("CALL FROM: " + payload.username);
 		payload.socketId = socket.id;
 		let match = handleCallPayload(payload);
 
 		if (match) {
-			console.log("MATCH MADE BETWEEN", match.teacher.username, "AND", match.learner.username);
+			myLog("MATCH MADE BETWEEN", match.teacher.username, "AND", match.learner.username);
 			setupCall(match, socket);
 		} else {
 			putOnWaitingList(payload.username, socket);
@@ -387,12 +387,12 @@ function setupCall(match, socket) {
 
 	// Handle the signaling logic
 	teacherSocket.on('offer', function (offerData) {
-//		console.log("RECIEVING OFFER:", offerData)
+//		myLog("RECIEVING OFFER:", offerData)
 		learnerSocket.emit('offer', offerData);
 	});
 	
 	learnerSocket.on('answer', function (answerData) {
-//		console.log("RECIEVING ANSWER:", answerData)
+//		myLog("RECIEVING ANSWER:", answerData)
 		teacherSocket.emit('answer', answerData);
 	});
 
@@ -400,7 +400,7 @@ function setupCall(match, socket) {
 
 // For when there is no match and the usermust wait
 function putOnWaitingList(username, socket) {
-	console.log("NO MATCH MADE, PUTTING", username, "ON WAITING LIST");
+	myLog("NO MATCH MADE, PUTTING", username, "ON WAITING LIST");
 	
 	let waitMessage = {
 		waiting: true
@@ -463,5 +463,16 @@ class Session {
 	
 	
 }
+
+function myLog(...strings) {
+	let str = strings.join(' ');
+	console.log(str);
+	dbConnection.collection('logs').insertOne({
+		date: new Date(),
+		log: str,
+	});
+	
+}
+
 
 
