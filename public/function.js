@@ -240,7 +240,7 @@ function call(messageKind) {
 	aboutCell.innerHTML = '';
 	let waitingInfo = document.createElement('div');
 	waitingInfo.className = 'text';
-	waitingInfo.innerHTML = "Please wait while we match you with a partner";
+	waitingInfo.innerHTML = "Please wait while we match you with a partner. Since QuickTalk is brand new this could take while. Please be patient so we can get our legs!";
 	aboutCell.appendChild(waitingInfo);
 	
 	
