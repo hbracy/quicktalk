@@ -7,12 +7,12 @@ var connection = null;
 
 //const serverHostname = '192.168.1.3'; // Home
 //const serverHostname = '35.237.137.132'; // Cloud
-//const serverHostname = '192.168.0.109'; // Alex's
-const serverHostname = 'thequicktalk.herokuapp.com'
+//const serverHostname = 'http://192.168.0.109:3000'; // Alex's
+const serverHostname = 'https://thequicktalk.herokuapp.com'
 
 const serverPort = 3000;
 
-const socket = io("https://" + serverHostname);
+const socket = io(serverHostname);
 
 socket.on('serverConnection', function(msg) {
 	console.log(msg);
@@ -99,13 +99,9 @@ socket.on('matched', function(msg) {
 			socket.emit('peerConnect');
 			peer.addStream(stream);
 			setTimeout(function(){
-				let hangupCell = document.getElementById('call-cell');
-				hangupCell.onclick = hangup;
-				hangupCell.innerHTML = '';
-				let hangupText = document.createElement('div');
-				hangupText.className = 'text';
-				hangupText.appendChild(document.createTextNode("Hangup"));
-				hangupCell.appendChild(hangupText);
+				
+				setupCallCell();
+				
 			}, 2000);
 		}).catch(function(e) {
 			console.log(e);
@@ -154,6 +150,18 @@ socket.on('insufficientTime', function(msg) {
 
 function hangup() {
 	window.location.reload();
+}
+
+function setupCallCell() {	
+	
+	
+	let hangupCell = document.getElementById('call-cell');
+	hangupCell.onclick = hangup;
+	hangupCell.innerHTML = '';
+	let hangupText = document.createElement('div');
+	hangupText.className = 'text';
+	hangupText.appendChild(document.createTextNode("Hangup"));
+	hangupCell.appendChild(hangupText);
 }
 
 function displayTime(timeMessage) {
