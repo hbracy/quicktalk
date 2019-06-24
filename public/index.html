@@ -3,6 +3,8 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+
 		<link rel="stylesheet" href="styles.css" type="text/css">
 	</head>
 
@@ -23,12 +25,12 @@
 				<div id="about-cell" class="cells">
 					<div class="about text">QuickTalk is a way to immerse yourself in another language right now, without having to go to another country. Just sign up, call, and chat.</div>
 				</div>
-				<myButton id="login-cell" class="cells" onclick="activateLoginForm()"><div class="text">LOGIN</div></myButton>
-				<myButton id="signup-cell" class="cells" onclick="activateSignupForm()"><div class="text">SIGN UP</div></myButton>
+				<myButton id="login-cell" class="cells" onclick="activateLoginForm()"><div class="text">Login</div></myButton>
+				<myButton id="signup-cell" class="cells" onclick="activateSignupForm()"><div class="text">Sign up</div></myButton>
 			</div>
 			<div id="right-box">
-				<myButton id="teach-cell" class="cells" onclick="goToTeach()"><div class="text">TEACH</div></myButton>
-				<myButton id="learn-cell" class="cells" onclick="goToLearn()"><div class="text">LEARN</div></myButton>
+				<myButton id="teach-cell" class="cells" onclick="goToTeach()"><div class="text">Teach</div></myButton>
+				<myButton id="learn-cell" class="cells" onclick="goToLearn()"><div class="text">Learn</div></myButton>
 			</div>
 		</div>
 				
@@ -85,7 +87,7 @@
 						<b>Confirm</b>
 					</label>
 					<input id="password-signup-input2" class="signup-password" type="password" placeholder="Confirm password" name="password" required autocomplete="current-password">
-					<myButton class="submit" onclick="signUp()">SIGN UP</myButton>
+					<myButton class="submit" onclick="signUp()">Sign Up</myButton>
 					<label>
 						<input type="checkbox" checked="checked" name="remember">Remember me
 					</label>
@@ -107,6 +109,10 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 		<script type="text/javascript" src='https://thequicktalk.herokuapp.com/socket.io/socket.io.js'>
 		</script>
+<!--
+		<script type="text/javascript" src='http://192.168.0.109:3000/socket.io/socket.io.js'>
+		</script>
+-->
 		<script src="https://github.com/t-mullen/simple-signal/releases/download/2.1.0/simple-signal-client.min.js"></script>
 		<script type="text/javascript" src="function.js"></script>
 	</body>

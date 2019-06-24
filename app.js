@@ -88,6 +88,7 @@ function onClientDisconnect(socket) {
 		delete learnerDict[socket.id];
 		delete teacherDict[socket.id];
 		myLog("USER DISCONNECTED");
+		myLog("CURRENTLY", Object.keys(clients).length, "CONNECTIONS");
 	});
 }
 

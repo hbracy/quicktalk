@@ -33,6 +33,7 @@
 /*  flex:  0 auto;*/
   box-sizing: border-box;
 	width: 50%;
+	height: 100%;
 }
 
 #top-box {
@@ -128,10 +129,34 @@
 
 }
 
+#choice-scroll-cell {
+	background-color: mediumpurple;
+  width: 20%;
+	height: 20%;
+
+}
+
+#language-scroll-cell {
+	background-color: mediumpurple;
+  width: 30%;
+	height: 20%;
+
+}
+
 #call-cell {
 	background-color: indianred;
 }
 
+#headline-container {
+	width: 100%;
+}
+
+#headline-begin {
+	font-size: 6vh;
+}
+
+#learn-teach-choice {
+}
 .centered {
 	text-align: center;
 }
@@ -144,6 +169,15 @@
   border: 0.2vh solid #ADE8E8;
   border-radius: 2vh;
 }
+
+.plain-cell{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  box-sizing: border-box;
+	background-color: #ffffff;
+}
+
 .text {
   color: white;
   font-weight: bold;
@@ -248,6 +282,13 @@ span.password {
 	height: 19%;
 }
 
+.scroll-button2 {
+	background-color: indianred;
+	width: 100%;
+	color: white;
+	height: 85%;
+}
+
 .info {
 	margin-bottom: 1vh;
 	display: block;
@@ -271,7 +312,7 @@ html, body {
 }
 
 body {
-	font-family: sans-serif;
+	font-family: 'Open Sans';
 
 }
 

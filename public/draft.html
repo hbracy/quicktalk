@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+    <head>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+			<link rel="stylesheet" href="styles.css" type="text/css">
+    </head>
+    <body id='body' class="centered">               
+        <div id="header-box">
+            <myButton id="about-header" class="cells" onclick="window.location.href='about.html'">
+                <div class="text linked">About</div>
+            </myButton>
+            <myButton id="header-cell" class="cells" onclick="window.location.href='index.html'">
+                <div class="text linked">QuickTalk</div>
+            </myButton>
+            <myButton id="profile-cell" class="cells" onclick="activateProfile()">
+                <div class="text linked">Profile</div>
+            </myButton>
+        </div>
+        <div id="app-box">
+            <div id="top-box">
+							<div id="headline-container" class="plain-cell">
+								<div id="headline-begin">
+									I want to
+								</div>
+										<div id="choice-scroll-cell" class="cells">
+											<div id="teach-scroll-div" class="scroll-div">
+												<myButton id="english" class="scroll-button2 cells">
+													Teach
+												</myButton>
+												<myButton id="chinese" class="scroll-button2 cells">
+													Learn
+												</myButton>
+											</div>
+										</div>
+										<div id="language-scroll-cell" class="cells">
+											<div id="teach-scroll-div" class="scroll-div">
+												<myButton id="english" class="scroll-button2 cells" onclick="addOption(this)">
+													English
+												</myButton>
+												<myButton id="chinese" class="scroll-button2 cells" onclick="addOption(this)">
+													Chinese
+												</myButton>
+												<myButton id="spanish" class="scroll-button2 cells" onclick="addOption(this)">
+													Spanish
+												</myButton>
+												<myButton id="french" class="scroll-button2 cells" onclick="addOption(this)">
+													French
+												</myButton>
+												<myButton id="russian" class="scroll-button2 cells" onclick="addOption(this)">
+													Russian
+												</myButton>
+												<myButton id="arabic" class="scroll-button2 cells" onclick="addOption(this)">
+													Arabic
+												</myButton>
+												<myButton id="portuguese" class="scroll-button2 cells" onclick="addOption(this)">
+													Portuguese
+												</myButton>
+												<myButton id="hindi" class="scroll-button2 cells" onclick="addOption(this)">
+													Hindi
+												</myButton>
+												<myButton id="german" class="scroll-button2 cells" onclick="addOption(this)">
+													German
+												</myButton>
+												
+											</div>
+										</div>
+
+								
+							</div>
+            </div>
+            <div id="bottom-box">
+                <div id="info-cell2" class="cells"><div class="about info-text">QuickTalk was made by Harold Bracy in an effort to keep his language skills sharp.</div></div>
+                 <audio id="incomingAudio" autoplay></audio>
+            </div>
+        </div>
+        
+<!--        <div id="loading-circle" class="loading-circle"><div></div></div>-->
+        
+        <div id="footer-box">
+            <div id="footer-cell" class="cells"><div class="text">All rights reserved</div></div>
+        </div>
+        
+        <div id="profile-modal" class="modal">
+            <span onclick="deactivate(this.parentNode)" class="close" title="Close Modal">&times;</span>
+            <div class="modal-content animate">
+                <div id="profile-container" class="container dark-text">
+                    <div id="profile-username" class="info dark-text"></div>
+                    <myButton id="logout-button" class="submit" onclick="logout()">Logout</myButton>
+                </div>
+            </div>
+        </div>
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<!--
+		<script type="text/javascript" src='https://thequicktalk.herokuapp.com/socket.io/socket.io.js'>
+		</script>
+-->
+				<script type="text/javascript" src='http://192.168.0.109:3000/socket.io/socket.io.js'>
+				</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.3.0/simplepeer.min.js"></script>
+        <script type="text/javascript" src="function.js"></script>
+    </body>
+</html>
