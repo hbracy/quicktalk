@@ -443,7 +443,7 @@ class Client {
 	}
 	
 	logout() {
-			this.username = "";
+		this.username = "";
 		this.email = "";
 		this.isLoggedIn = false;
 		this.isChatting = false;
