@@ -5,7 +5,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "express": "^4.15.2",
-    "mongoose": "^5.5.13",
+    "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.3",
     "public-ip": "^3.1.0",
     "simple-peer": "^9.3.0",
